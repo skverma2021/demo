@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Spinner from '../home/Spinner';
 import { errText } from '../util/errMsgText';
@@ -14,6 +14,7 @@ const Calculate = () => {
   const [result, setResult] = useState('');
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
 
   const okSubmit = () => {
     if (theMath.opr == 'div' && parseFloat(theMath.argTwo) < 0.000000001)
@@ -22,6 +23,15 @@ const Calculate = () => {
     if (theMath.argTwo === '') return false;
     return true;
   };
+
+  let timeoutId;
+  const goHome = () => {
+    navigate('/');
+  };
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   const onValChange = (e) => {
     setTheMath({ ...theMath, [e.target.name]: e.target.value });
@@ -45,7 +55,10 @@ const Calculate = () => {
   };
 
   if (status === 'busy') return <Spinner />;
-  if (status === 'Error') return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
+  if (status === 'Error') {
+    timeoutId = setTimeout(goHome, 3000);
+    return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
+  }
 
   return (
     <>

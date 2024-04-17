@@ -1,20 +1,18 @@
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 import { Demo } from './demo/Demo';
 import Welcome from './demo/Welcome';
 import Calculate from './demo/Calculate';
 import Series from './demo/Series';
-import { Link } from 'react-router-dom';
+import Home from './home/Home';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <Link to='/demo' style={{ marginRight: '15px' }}>
-        Demo
+      <Link to='/' style={{ marginRight: '15px' }}>
+        Home
       </Link>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/demo' element={<Demo />} />
         <Route path='/demo/welcome' element={<Welcome />} />
         <Route path='/demo/cal' element={<Calculate />} />
@@ -23,5 +21,4 @@ function App() {
     </>
   );
 }
-
 export default App;

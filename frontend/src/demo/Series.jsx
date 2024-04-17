@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Spinner from '../home/Spinner';
 import { errText } from '../util/errMsgText';
@@ -19,6 +19,16 @@ const Series = () => {
   const [formTouched, setFormTouched] = useState(false);
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
+
+  let timeoutId;
+  const goHome = () => {
+    navigate('/');
+  };
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   const handleArrayChange = (e) => {
     setArrayStr(e.target.value);
@@ -43,7 +53,10 @@ const Series = () => {
   };
 
   if (status === 'busy') return <Spinner />;
-  if (status === 'Error') return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
+  if (status === 'Error') {
+    timeoutId = setTimeout(goHome, 3000);
+    return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
+  }
 
   return (
     <>
