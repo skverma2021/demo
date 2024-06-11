@@ -16,7 +16,7 @@ const Home = () => {
           Comprehensive Guide
         </h5>
 
-        <p>
+        <p style={{ font: 'caption' }}>
           In today’s data-driven world, effective management of information is
           crucial for organizations. Whether you’re a seasoned developer or just
           starting out, this tutorial will walk you through the process of
@@ -38,10 +38,13 @@ const Home = () => {
           </li>
         </ul>
         <p>
-          With the topics covered here we will create the backend of the
-          exercise comprising of routes and middleware. Since the frontend will
-          not be ready until we have covered React primer, we will test it using
-          Postman.
+          API primer creates routes and middleware for Welcome, Calculate and
+          Series utilities. Since the frontend will not be ready until we have
+          covered React primer, we will test it using Postman.
+        </p>
+        <p>
+          Later we will build a React application to provide a web based
+          interface that will use the API created earlier.
         </p>
       </div>
     </>
