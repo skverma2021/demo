@@ -18,7 +18,7 @@ app.post('/welcome', (req, res) => {
   const yrs = Math.round(Math.abs((today - theDob) / oneYear));
 
   const userName = `${
-    (req.body.gender === 'M' && 'Mr') || (req.body.gender === 'F' && 'Ms')
+    (req.body.gender === 'M' || req.body.gender === 'm' && 'Mr') || (req.body.gender === 'F' || req.body.gender === 'f' && 'Ms')
   }  ${req.body.name}`;
 
   const userAge = `${yrs} years`;
@@ -28,5 +28,5 @@ app.post('/welcome', (req, res) => {
 const PORT = 3000;
 
 app.listen(PORT, () =>
-  console.log(`The server started running   on port: ${PORT}`)
+  console.log(`The server [welcome] started running  on port: ${PORT}`)
 );
