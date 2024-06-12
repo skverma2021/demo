@@ -5,6 +5,8 @@ const demo = require('./routes/demo');
 
 const PORT = 3000;
 
+// deleted master
+
 app.use(cors());
 // Alternatively, you can specify the allowed origins explicitly
 // const allowedOrigins = ['http://localhost:5173'];
