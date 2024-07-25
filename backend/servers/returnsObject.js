@@ -4,4 +4,4 @@ app.get('/', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.json({ method: req.method, path: req.path });
 });
-app.listen(3000, () => console.log('The server [justListen] started running ...'));
+app.listen(3000, () => console.log('The server [returns object] started running ...'));
