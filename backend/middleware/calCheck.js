@@ -42,13 +42,11 @@
 // with Error Codes
 
 const calCheck = (req, res, next) => {
+  const userData = { inValid: true, msg: '' };
+
   if (typeof req.params.opr == 'undefined' || req.params.opr.length == 0) {
-    return res.status(400).json({
-      eCode: 'ERROR',
-      msg: 'Operator not provided',
-      theJob: {},
-      output: {},
-    });
+    req.userData = { ...userData, msg: 'Operator missing' };
+    next();
   }
   if (
     !(
@@ -57,55 +55,34 @@ const calCheck = (req, res, next) => {
       req.params.opr == 'div'
     )
   ) {
-    return res
-      .status(400)
-      .json({
-        eCode: 'ERROR',
-        msg: 'Invalid Operator',
-        theJob: {},
-        output: {},
-      });
+    req.userData = { ...userData, msg: 'Invalid operator' };
+    next();
   }
   if (req.params.opr == 'div' && parseFloat(req.query.arg2) < 0.000000001) {
-    return res.status(400).json({
-      eCode: 'ERROR',
-      msg: 'Invalid Operation - Division by zero',
-      theJob: {},
-      output: {},
-    });
+    req.userData = { ...userData, msg: 'Division by zero' };
+    next();
   }
   if (!(Object.hasOwn(req.query, 'arg1') && Object.hasOwn(req.query, 'arg2'))) {
-    return res.status(400).json({
-      eCode: 'ERROR',
-      msg: 'One of the argument is missing',
-      theJob: {},
-      output: {},
-    });
+    req.userData = { ...userData, msg: 'one of the argument is missing' };
+    next();
   }
   if (
     typeof req.query.arg1 == 'undefined' ||
     req.query.arg1.length == 0 ||
     isNaN(req.query.arg1)
   ) {
-    return res.status(400).json({
-      eCode: 'ERROR',
-      msg: 'Argument1 is invalid',
-      theJob: {},
-      output: {},
-    });
+    req.userData = { ...userData, msg: 'invalid argument1 ' };
+    next();
   }
   if (
     typeof req.query.arg2 == 'undefined' ||
     req.query.arg2.length == 0 ||
     isNaN(req.query.arg2)
   ) {
-    return res.status(400).json({
-      eCode: 'ERROR',
-      msg: 'Argument2 is invalid',
-      theJob: {},
-      output: {},
-    });
+    req.userData = { ...userData, msg: 'invalid argument2 ' };
+    next();
   }
+  req.userData = { ...userData, inValid: false, msg: 'Valid data' };
   next();
 };
 

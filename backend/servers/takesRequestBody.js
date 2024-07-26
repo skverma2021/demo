@@ -9,4 +9,6 @@ app.post('/api', (req, res) => {
     theSum: parseInt(req.body.x) + parseInt(req.body.y),
   });
 });
-app.listen(3000, () => console.log('The server [requestBody] started running ...'));
+app.listen(3000, () =>
+  console.log('The server [requestBody] started running ...')
+);

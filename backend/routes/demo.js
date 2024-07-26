@@ -5,7 +5,11 @@ const seriesCheck = require('../middleware/seriesCheck');
 const welcomeCheck = require('../middleware/welcomeCheck');
 
 router.post('/welcome', welcomeCheck, (req, res) => {
-  // console.log('Hi');
+  if (req.userData.inValid) {
+    res.status(400).json({ eCode: 'ERROR', msg: req.userData.msg });
+    return;
+  }
+
   const today = Date.now();
   const theDob = new Date(req.body.dob);
   const oneYear = 365 * 24 * 60 * 60 * 1000; //milliseconds
@@ -24,6 +28,10 @@ router.post('/welcome', welcomeCheck, (req, res) => {
   });
 });
 router.get('/cal/:opr', calCheck, (req, res) => {
+  if (req.userData.inValid) {
+    res.status(400).json({ eCode: 'ERROR', msg: req.userData.msg });
+    return;
+  }
   const resultSum = parseFloat(req.query.arg1) + parseFloat(req.query.arg2);
   const resultMul = parseFloat(req.query.arg1) * parseFloat(req.query.arg2);
   const resultDiv = parseFloat(req.query.arg1) / parseFloat(req.query.arg2);
@@ -42,7 +50,7 @@ router.get('/cal/:opr', calCheck, (req, res) => {
     output: `${outputMsg}`,
   });
 });
-router.post('/series', seriesCheck, (req, res) => {
+router.post('/series', (req, res) => {
   const theArray = req.body.series;
   const theSum = theArray.reduce(
     (accumulator, currentValue) => accumulator + currentValue

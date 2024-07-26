@@ -1,15 +1,13 @@
 const welcomeCheck = (req, res, next) => {
+  const userData = { inValid: true, msg: '' };
+
   if (typeof req.body.name == 'undefined' || req.body.name.length == 0) {
-    console.log('Here');
-    return res
-      .status(400)
-      .json({ eCode: 'ERROR', msg: 'Name not provided', user: {} });
-    // return res.json([{ eCode: 'ERROR', msg: 'Name not provided', user: {} }]);
+    req.userData = { ...userData, msg: 'Name missing' };
+    next();
   }
   if (!(req.body.gender == 'M' || req.body.gender == 'F')) {
-    return res
-      .status(400)
-      .json({ eCode: 'ERROR', msg: 'Invalid Gender Specified', user: {} });
+    req.userData = { ...userData, msg: 'invalid gender' };
+    next();
   }
   const d = new Date(req.body.dob);
 
@@ -24,16 +22,14 @@ const welcomeCheck = (req, res, next) => {
 
   if (Object.prototype.toString.call(d) === '[object Date]') {
     if (isNaN(d.getTime())) {
-      return res
-        .status(400)
-        .json({ eCode: 'ERROR', msg: 'Invalid Date Specified', user: {} });
+      req.userData = { ...userData, msg: 'Invalid date' };
+      next();
     }
   } else {
-    return res
-      .status(400)
-      .json({ eCode: 'ERROR', msg: 'Invalid Date Specified', user: {} });
+    req.userData = { ...userData, msg: 'Invalid date' };
+    next();
   }
-
+  req.userData = { ...userData, inValid: false, msg: 'Valid data' };
   next();
 };
 
