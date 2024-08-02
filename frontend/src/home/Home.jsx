@@ -1,9 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import SevenWonders from '../SevenWonders';
+// import imgGal from './SevenWonders';
 
 const Home = () => {
   return (
     <>
+      <Link to='/whyReact' style={{ marginRight: '15px' }}>
+        Why React
+      </Link>
+      <Link to='/sevenWonders' style={{ marginRight: '15px' }}>
+        Seven Wonders
+      </Link>
       <Link to='/demo' style={{ marginRight: '15px' }}>
         Demo
       </Link>
@@ -38,14 +46,17 @@ const Home = () => {
           </li>
         </ul>
         <p>
-          API primer creates routes and middleware for Welcome, Calculate and
-          Series utilities. Since the frontend will not be ready until we have
-          covered React primer, we will test it using Postman.
+          API primer created routes and middleware for Welcome, Calculate and
+          Series utilities. Since the frontend was not ready we tested the
+          routes using Postman.
         </p>
         <p>
-          Later we will build a React application to provide a web based
-          interface that will use the API created earlier.
+          Now we will build a React application to provide a web based interface
+          that will use the API created earlier.
         </p>
+        {/* <p>
+          <SevenWonders />
+        </p> */}
       </div>
     </>
   );

@@ -6,6 +6,7 @@ const welcomeCheck = require('../middleware/welcomeCheck');
 
 router.post('/welcome', welcomeCheck, (req, res) => {
   if (req.userData.inValid) {
+    // res.json({ eCode: 'ERROR', msg: req.userData.msg });
     res.status(400).json({ eCode: 'ERROR', msg: req.userData.msg });
     return;
   }
