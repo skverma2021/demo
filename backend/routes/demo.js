@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const calCheck = require('../middleware/calCheck');
-const seriesCheck = require('../middleware/seriesCheck');
 const welcomeCheck = require('../middleware/welcomeCheck');
 
 router.post('/welcome', welcomeCheck, (req, res) => {
