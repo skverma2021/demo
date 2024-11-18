@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
 import { useState } from 'react';
+
 import w0 from './wonders/goldenTemple.gif';
 import w1 from './wonders/gomateshwara.gif';
 import w2 from './wonders/hampi.gif';
@@ -42,23 +42,14 @@ const SevenWonders = () => {
 
   const [count, setCount] = useState(0);
   return (
-    <Fragment>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <button onClick={() => setCount(count + 1)}>next</button>
-              <p>{images[count % 7].txt}</p>
-              <img
-                src={images[count % 7].img}
-                alt='Busy...'
-                style={{ width: '2000px', margin: 'auto', display: 'block' }}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </Fragment>
-  );
+    <div style={{ display: 'flex', flexDirection: 'column'}}>
+      <button onClick={() => setCount(count + 1)} style={{ height: '50px' }}>next</button>
+      <p style={{textAlign:'right'}}><b>{images[count % 7].txt}</b></p>
+      <img
+        src={images[count % 7].img}
+        alt='Busy...'
+      />
+    </div>
+  )
 };
 export default SevenWonders;

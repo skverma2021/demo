@@ -1,27 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-// import SevenWonders from '../SevenWonders';
-// import imgGal from './SevenWonders';
 
 const Home = () => {
   return (
     <>
-      <Link to='/whyReact' style={{ marginRight: '15px' }}>
-        Why React
-      </Link>
-      <Link to='/sevenWonders' style={{ marginRight: '15px' }}>
-        Seven Wonders
-      </Link>
-      <Link to='/demo' style={{ marginRight: '15px' }}>
-        Demo
-      </Link>
       <div style={{ width: '100%', height: '100vh' }}>
         <h1 style={{ color: 'magenta', textAlign: 'center' }}>
           SERN Tutorial - DEMO
         </h1>
         <h5 style={{ color: 'magenta', textAlign: 'center' }}>
           Building an MIS with SQL Server, Express, React, and Node: A
-          Comprehensive Guide
+          Project based tutorial
         </h5>
 
         <p style={{ font: 'caption' }}>
@@ -54,9 +42,6 @@ const Home = () => {
           Now we will build a React application to provide a web based interface
           that will use the API created earlier.
         </p>
-        {/* <p>
-          <SevenWonders />
-        </p> */}
       </div>
     </>
   );

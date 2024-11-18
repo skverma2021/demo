@@ -4,18 +4,35 @@ import Welcome from './demo/Welcome';
 import Calculate from './demo/Calculate';
 import Series from './demo/Series';
 import Home from './home/Home';
-import { MyComponent } from './MyComponent';
 import SevenWonders from './SevenWonders';
 
 function App() {
   return (
     <>
-      <Link to='/' style={{ marginRight: '15px' }}>
-        Home
-      </Link>
+      <header>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            backgroundColor: 'lightblue',
+            height: '10%',
+          }}
+        >
+          <div style={{ display: 'flex', marginTop: '0px' }}>
+            <Link to='/' style={{ marginRight: '15px' }}>Home</Link>
+          </div>
+          <div style={{ display: 'flex', marginTop: '0px' }}>
+            <Link to='/sevenWonders' style={{ marginRight: '15px' }}>Seven Wonders</Link>
+          </div>
+          <div style={{ display: 'flex', marginTop: '0px' }}>
+            <Link to='/demo' style={{ marginRight: '15px' }}>Demo</Link>
+          </div>
+
+        </div>
+      </header>
+
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/whyReact' element={<MyComponent />} />
         <Route path='/sevenWonders' element={<SevenWonders />} />
         <Route path='/demo' element={<Demo />} />
         <Route path='/demo/welcome' element={<Welcome />} />
