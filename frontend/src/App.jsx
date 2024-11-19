@@ -13,7 +13,7 @@ function App() {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent:'right',
             backgroundColor: 'lightblue',
             height: '10%',
           }}
@@ -27,7 +27,6 @@ function App() {
           <div style={{ display: 'flex', marginTop: '0px' }}>
             <Link to='/demo' style={{ marginRight: '15px' }}>Demo</Link>
           </div>
-
         </div>
       </header>
 

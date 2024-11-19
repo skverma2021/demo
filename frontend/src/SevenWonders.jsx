@@ -42,13 +42,17 @@ const SevenWonders = () => {
 
   const [count, setCount] = useState(0);
   return (
-    <div style={{ display: 'flex', flexDirection: 'column'}}>
-      <button onClick={() => setCount(count + 1)} style={{ height: '50px' }}>next</button>
-      <p style={{textAlign:'right'}}><b>{images[count % 7].txt}</b></p>
+    <div >
+      <button onClick={() => setCount(count + 1)}>
+        next
+      </button>
+        <p>
+          <b>{images[count % 7].txt}</b>
+        </p>
       <img
         src={images[count % 7].img}
         alt='Busy...'
-      />
+        />
     </div>
   )
 };
