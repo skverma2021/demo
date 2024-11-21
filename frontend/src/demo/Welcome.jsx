@@ -182,7 +182,7 @@ const Welcome = () => {
                 <td>{result.name}</td>
               </tr>
               <tr>
-                <td>Your Are</td>
+                <td>You Are</td>
                 <td>:</td>
                 <td>{result.age}</td>
               </tr>
