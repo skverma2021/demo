@@ -1,41 +1,22 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-
 <body>
-
     <div id="mydiv"></div>
-
     <script type="text/babel">
-
         function Hello() {
             return (
-                // 1
                 <h1 style={{ color: 'blue' }}>Hello World! [with Babel]</h1>
-
-                // 2
-                // <div style={{ color: 'blue' }}>
-                //     it is a DIV
-                //     <p style={{ color: 'red' }}>
-                //         it is a P: Welcome to React! [with Babel]
-                //     </p>
-                // </div>
             );
-
         }
         console.log(Hello())
-
         const container = document.getElementById('mydiv');
         const root = ReactDOM.createRoot(container);
         root.render(<Hello />)
-
     </script>
-
 </body>
-
 </html>

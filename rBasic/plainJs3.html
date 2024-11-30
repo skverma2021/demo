@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+</head>
+
+<body>
+    <div id="mydiv"></div>
+    <!-- <script type="text/babel"></script> -->
+    <script>
+        function Hello() {
+            // YOU CAN CREATE NESTED HTML ELEMENTS
+            return React.createElement(
+                "div",
+                { style: { color: "blue" } },
+                "it is a DIV",
+                React.createElement(
+                    "p",
+                    { style: { color: "red" } },
+                    "it is a P: Welcome to React! [without Babel]"
+                )
+            );
+        }
+        console.log(Hello())
+        const container = document.getElementById('mydiv');
+        const root = ReactDOM.createRoot(container);
+        root.render(React.createElement(Hello))
+    </script>
+</body>
+
+</html>
