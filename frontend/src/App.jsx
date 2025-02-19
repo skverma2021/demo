@@ -1,4 +1,4 @@
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, Link, useLocation } from 'react-router-dom';
 import { Demo } from './demo/Demo';
 import Welcome from './demo/Welcome';
 import Calculate from './demo/Calculate';
@@ -7,25 +7,32 @@ import Home from './home/Home';
 import SevenWonders from './SevenWonders';
 
 function App() {
+  const location = useLocation()
   return (
     <>
       <header>
         <div
           style={{
             display: 'flex',
-            justifyContent:'right',
+            justifyContent: 'right',
             backgroundColor: 'lightblue',
             height: '10%',
           }}
         >
           <div style={{ display: 'flex', marginTop: '0px' }}>
-            <Link to='/' style={{ marginRight: '15px' }}>Home</Link>
+            {location.pathname !== '/' && (
+              <Link to='/' style={{ marginRight: '15px' }}>Home</Link>
+            )}
           </div>
           <div style={{ display: 'flex', marginTop: '0px' }}>
-            <Link to='/sevenWonders' style={{ marginRight: '15px' }}>Seven Wonders</Link>
+            {location.pathname !== '/sevenWonders' && (
+              <Link to='/sevenWonders' style={{ marginRight: '15px' }}>Seven Wonders</Link>
+            )}
           </div>
           <div style={{ display: 'flex', marginTop: '0px' }}>
-            <Link to='/demo' style={{ marginRight: '15px' }}>Demo</Link>
+            {location.pathname !== '/demo' && (
+              <Link to='/demo' style={{ marginRight: '15px' }}>Demo</Link>
+            )}
           </div>
         </div>
       </header>

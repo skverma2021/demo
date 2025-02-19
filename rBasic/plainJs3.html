@@ -15,11 +15,12 @@
             return React.createElement(
                 "div",
                 { style: { color: "blue" } },
-                "it is a DIV",
+                "You are in DIV",
                 React.createElement(
                     "p",
                     { style: { color: "red" } },
-                    "it is a P: Welcome to React! [without Babel]"
+                    "You are inside P now ",
+                    React.createElement('b', null, ' Finally, you are in b: Hello World !!!')
                 )
             );
         }
