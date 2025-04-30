@@ -14,7 +14,14 @@ const Calculate = () => {
   const [result, setResult] = useState('');
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
+
   const navigate = useNavigate();
+
+  const onValChange = (e) => {
+    setTheMath({ ...theMath, [e.target.name]: e.target.value });
+    setResult('');
+    setStatus('');
+  };
 
   const okSubmit = () => {
     if (theMath.opr == 'div' && parseFloat(theMath.argTwo) < 0.000000001)
@@ -24,20 +31,15 @@ const Calculate = () => {
     return true;
   };
 
-  let timeoutId;
   const goHome = () => {
     navigate('/');
   };
 
-  useEffect(() => {
-    return () => clearTimeout(timeoutId);
-  }, []);
+  useEffect(() => { 
+    const timeoutId = status === 'Error' && setTimeout(goHome, 3000);
+    return () => clearTimeout(timeoutId);  
+  }, [status]); 
 
-  const onValChange = (e) => {
-    setTheMath({ ...theMath, [e.target.name]: e.target.value });
-    setResult('');
-    setStatus('');
-  };
 
   const getResult = async (event) => {
     setStatus('busy');
@@ -55,10 +57,7 @@ const Calculate = () => {
   };
 
   if (status === 'busy') return <Spinner />;
-  if (status === 'Error') {
-    timeoutId = setTimeout(goHome, 3000);
-    return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
-  }
+  if (status === 'Error') return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
 
   return (
     <>
@@ -119,11 +118,7 @@ const Calculate = () => {
                   <input
                     name='argOne'
                     value={theMath.argOne || ''}
-                    // type='range'
                     type='number'
-                    // min={-999}
-                    // max={+999}
-                    // onChange={handleArgOneChange}
                     onChange={(e) => {
                       return onValChange(e);
                     }}
@@ -139,11 +134,7 @@ const Calculate = () => {
                   <input
                     name='argTwo'
                     value={theMath.argTwo || ''}
-                    // type='range'
                     type='number'
-                    // min={-999}
-                    // max={+999}
-                    // onChange={handleArgTwoChange}
                     onChange={(e) => {
                       return onValChange(e);
                     }}

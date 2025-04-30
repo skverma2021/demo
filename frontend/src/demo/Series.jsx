@@ -19,16 +19,8 @@ const Series = () => {
   const [formTouched, setFormTouched] = useState(false);
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
+
   const navigate = useNavigate();
-
-  let timeoutId;
-  const goHome = () => {
-    navigate('/');
-  };
-
-  useEffect(() => {
-    return () => clearTimeout(timeoutId);
-  }, []);
 
   const handleArrayChange = (e) => {
     setArrayStr(e.target.value);
@@ -36,6 +28,17 @@ const Series = () => {
     setStatus('Submit to continue...');
     setResult({});
   };
+
+  const goHome = () => {
+    navigate('/');
+  };
+
+  useEffect(() => {
+    const timeoutId = status === 'Error' && setTimeout(goHome, 3000);
+    return () => clearTimeout(timeoutId);
+  }, [status]);
+
+
   const getResult = async (event) => {
     setStatus('busy');
     event.preventDefault();
@@ -53,10 +56,7 @@ const Series = () => {
   };
 
   if (status === 'busy') return <Spinner />;
-  if (status === 'Error') {
-    timeoutId = setTimeout(goHome, 3000);
-    return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
-  }
+  if (status === 'Error') return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
 
   return (
     <>

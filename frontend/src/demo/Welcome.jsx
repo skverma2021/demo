@@ -14,7 +14,14 @@ const Welcome = () => {
   const [result, setResult] = useState({});
   const [status, setStatus] = useState('');
   const [msg, setMsg] = useState('');
+
   const navigate = useNavigate();
+
+   const onValChange = (e) => {
+    setUserInput({ ...userInput, [e.target.name]: e.target.value });
+    setResult('');
+    setStatus('');
+  }; 
 
   const okSubmit = () => {
     if (userInput.name.length == 0) return false;
@@ -23,21 +30,15 @@ const Welcome = () => {
     return true;
   };
 
-  let timeoutId;
   const goHome = () => {
     navigate('/');
   };
 
-  useEffect(() => {
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  const onValChange = (e) => {
-    setUserInput({ ...userInput, [e.target.name]: e.target.value });
-    setResult('');
-    setStatus('');
-  };
-
+  useEffect(() => { 
+    const timeoutId = status === 'Error' && setTimeout(goHome, 3000);
+    return () => clearTimeout(timeoutId);  
+  }, [status]); 
+  
   const postUserDetails = async (event) => {
     setStatus('busy');
     event.preventDefault();
@@ -56,10 +57,8 @@ const Welcome = () => {
   };
 
   if (status === 'busy') return <Spinner />;
-  if (status === 'Error') {
-    timeoutId = setTimeout(goHome, 3000);
-    return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
-  }
+  if (status === 'Error') return <h1 style={{ color: 'red' }}>Error: {msg}</h1>;
+
   return (
     <>
       <div
@@ -110,13 +109,6 @@ const Welcome = () => {
                 </td>
                 <td>:</td>
                 <td>
-                  {/* <input
-                    name='gender'
-                    value={userInput.gender}
-                    onChange={(e) => {
-                      return onValChange(e);
-                    }}
-                  /> */}
                   <input
                     type='radio'
                     id='male'
